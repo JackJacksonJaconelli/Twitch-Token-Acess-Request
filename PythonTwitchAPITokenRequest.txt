@@ -1,0 +1,19 @@
+import requests
+
+# Set the API endpoint and parameters
+endpoint = 'https://id.twitch.tv/oauth2/token'
+
+params = {
+    'grant_type': 'client_credentials',
+    'client_id': 'Client ID',
+    'client_secret': 'Client Secret',
+    'scope': 'user:read:email'
+}
+
+# Send the POST request and print the response
+response = requests.post(endpoint, params=params)
+if response.status_code != 200:
+    print(f"Failed to retrieve access token: {response.json()['message']}")
+else:
+    access_token = response.json()['access_token']
+    print(access_token)
